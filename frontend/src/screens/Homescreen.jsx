@@ -58,7 +58,7 @@ const Homescreen = () => {
         <div className="row">
           {products.map((product) => (
             <div
-              className="col-lg-4 col-md-6 col-sm-12 col-xl-3"
+              className="col-lg-4 col-md-12 col-sm-12 col-xl-3"
               key={product._id}
             >
               <Product product={product} />
