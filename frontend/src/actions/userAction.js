@@ -27,6 +27,7 @@ import {
 } from "../constants/userConstant";
 import { ORDER_LIST_MY_RESET } from '../constants/orderConstant'
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL || ""
 export const login = (email, password) => async (dispatch) => {
   try {
     dispatch({
@@ -39,7 +40,7 @@ export const login = (email, password) => async (dispatch) => {
       },
     };
     const { data } = await axios.post(
-      "api/users/login",
+      "${backendUrl}/api/users/login",
       { email, password },
       config
     );
@@ -84,7 +85,7 @@ export const register = (name, email, password) => async (dispatch) => {
       },
     };
     const { data } = await axios.post(
-      "api/users",
+      "${backendUrl}/api/users",
       { name, email, password },
       config
     );
@@ -130,7 +131,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/users/${id}`, config);
+    const { data } = await axios.get(`${backendUrl}/api/users/${id}`, config);
 
     dispatch({
       type: USER_DETAILS_SUCCESS,
@@ -164,7 +165,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.put(`/api/users/profile`, user, config);
+    const { data } = await axios.put(`${backendUrl}/api/users/profile`, user, config);
 
     dispatch({
       type: USER_UPDATE_PROFILE_SUCCESS,
@@ -196,7 +197,7 @@ export const listUsers = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/users`, config);
+    const { data } = await axios.get(`${backendUrl}/api/users`, config);
 
     dispatch({
       type: USER_LIST_SUCCESS,
@@ -232,7 +233,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
       },
     }
 
-    await axios.delete(`/api/users/${id}`, config)
+    await axios.delete(`${backendUrl}/api/users/${id}`, config)
 
     dispatch({ type: USER_DELETE_SUCCESS })
   } catch (error) {
@@ -266,7 +267,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.put(`/api/users/${user._id}`, user, config)
+    const { data } = await axios.put(`${backendUrl}/api/users/${user._id}`, user, config)
 
     dispatch({ type: USER_UPDATE_SUCCESS })
 
