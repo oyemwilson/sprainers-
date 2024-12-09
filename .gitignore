@@ -7,6 +7,8 @@
 .pnp.js
 /frontend/node_modules/
 node_modules/
+frontend/node_modules
+frontend/node_modules/.cache/default-development
 
 # testing
 /coverage
