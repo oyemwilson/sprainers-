@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import {PayPalButton} from 'react-paypal-button-v2'
+import {PayPalButtons} from '@paypal/react-paypal-js'
 import { useNavigate, Link,useParams  } from "react-router-dom";
 import { Row, Col, ListGroup, Image, Card, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -199,7 +199,7 @@ const OrderScreen = ({match, history}) => {
                   {!sdkReady ? (
                     <Loader />
                   ) : (
-                    <PayPalButton
+                    <PayPalButtons
                       amount={order.totalPrice}
                       onSuccess={successPaymentHandler}
                     />
