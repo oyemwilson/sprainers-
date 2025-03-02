@@ -21,9 +21,20 @@ connectDB();
 const app = express();
 
 // Enable CORS with specific configuration
+const allowedOrigins = [
+  'https://sprainers-1.onrender.com',
+  'http://localhost:3000', // For local development
+];
+
 app.use(
   cors({
-    origin: 'https://sprainers-1.onrender.com', // Replace with your actual frontend URL
+    origin: (origin, callback) => {
+      if (allowedOrigins.includes(origin) || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
   })
