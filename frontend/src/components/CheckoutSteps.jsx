@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
   return (
-    <div className="nav justify-content-center mb-4">
+    <div className="nav align-items-center justify-content-center mb-4">
       <div className="nav-item">
         {step1 ? (
           <Link to="/login" className="nav-link">
@@ -12,7 +12,9 @@ const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
         ) : (
           <div className="nav-link disabled"> Sign In</div>
         )}
+        
       </div>
+
 
       <div className="nav-item">
         {step2 ? (

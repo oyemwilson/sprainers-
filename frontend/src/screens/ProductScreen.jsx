@@ -90,10 +90,10 @@ const ProductScreen = ({}) => {
               className="container-fluid"
             />
           </div>
-          <div className="col-md-4">
+          <div className="col-md-4 ">
             <ListGroup
               variant="flush"
-              style={{ fontSize: "1vw" }}
+             
             >
               <ListGroupItem>
                 <h3 className="p-0">{product.name}</h3>
@@ -162,7 +162,7 @@ const ProductScreen = ({}) => {
         </div>
       )}
       <Row>
-        <Col md={6}>
+        <Col md={6} className="my-5">
           <h2>Reviews</h2>
           {product.reviews.length === 0 && <Message>No Reviews</Message>}
           <ListGroup variant="flush">
