@@ -17,10 +17,16 @@ import UserEditScreen from './screens/UserEditScreen';
 import ProductListScreen from './screens/ProductListScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
 import OrderListScreen from './screens/OrderListScreen'
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 const App = () => {
   return (
     <>
+        <PayPalScriptProvider options={{ 
+      "client-id": "AY6kzhRmm7sCGSvk0Z-3Vj1e-4Eg9j1GeSBCvhWZIt2kTJY5HzFwKFiX17w6y0hIMdjsgZWSTVuckQQ3",
+      currency: "USD"
+      // other options as needed
+    }}>
     <Header />
       <Container>
           <Routes>
@@ -43,6 +49,7 @@ const App = () => {
           </Routes> 
         </Container>
     <Footer />
+    </PayPalScriptProvider>
     </>
   );
 }

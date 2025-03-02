@@ -26,6 +26,13 @@ import {
   USER_UPDATE_FAIL,
 } from "../constants/userConstant";
 import { ORDER_LIST_MY_RESET } from '../constants/orderConstant'
+import { useNavigate } from 'react-router-dom'
+
+// Inside your component
+
+
+// Replace document.location.href with:
+
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL || ""
 export const login = (email, password) => async (dispatch) => {
@@ -61,7 +68,7 @@ export const login = (email, password) => async (dispatch) => {
     });
   }
 };
-export const logout = () => (dispatch) => {
+export const logout = (navigateFunc) => (dispatch) => {
   localStorage.removeItem('userInfo')
   localStorage.removeItem('cartItems')
   localStorage.removeItem('shippingAddress')
@@ -70,7 +77,14 @@ export const logout = () => (dispatch) => {
   dispatch({ type: USER_DETAILS_RESET })
   dispatch({ type: ORDER_LIST_MY_RESET })
   dispatch({ type: USER_LIST_RESET })
-  document.location.href = '/login'
+  
+  // Use the passed navigate function instead of trying to call the hook here
+  if (navigateFunc) {
+    navigateFunc('/login')
+  } else {
+    // Fallback for cases where navigate isn't available
+    document.location.href = '/login'
+  }
 }
 
 export const register = (name, email, password) => async (dispatch) => {

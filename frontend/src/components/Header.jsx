@@ -5,15 +5,17 @@ import { Route } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap'
 import { logout } from '../actions/userAction'
 import SearchBox from './SearchBox'
+import { useNavigate } from 'react-router-dom'
 
 const Header = () => {
 
   const dispatch = useDispatch()
   const userLogin= useSelector( state => state.userLogin)
   const {userInfo} = userLogin
+  const navigate = useNavigate()
 
   const logoutHandler = () => {
-    dispatch(logout())
+    dispatch(logout(navigate))
   }
   return (
     <header>
