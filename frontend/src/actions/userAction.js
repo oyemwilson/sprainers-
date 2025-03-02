@@ -40,7 +40,7 @@ export const login = (email, password) => async (dispatch) => {
       },
     };
     const { data } = await axios.post(
-      "${backendUrl}/api/users/login",
+      `${backendUrl}/api/users/login`,
       { email, password },
       config
     );
@@ -85,7 +85,7 @@ export const register = (name, email, password) => async (dispatch) => {
       },
     };
     const { data } = await axios.post(
-      "${backendUrl}/api/users",
+      `${backendUrl}/api/users`,
       { name, email, password },
       config
     );
