@@ -10,6 +10,7 @@ import userRoutes from './routes/userRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
+import fetch from 'node-fetch';
 
 // Initialize dotenv to load environment variables
 dotenv.config();
@@ -76,14 +77,32 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+app.get('/ping', (req, res) => {
+  res.status(200).send('Server is awake!');
+});
+
+// Self-ping function
+function keepAwake() {
+  const url = 'https://your-app-url.herokuapp.com/ping'; // Replace with your app's URL
+  setInterval(async () => {
+    try {
+      const response = await fetch(url);
+      console.log(`Pinged server: ${response.status}`);
+    } catch (error) {
+      console.error('Error pinging server:', error);
+    }
+  }, 300000); // Ping every 5 minutes (300,000 ms)
+}
+
 // Error handling middleware
 app.use(notFound);
 app.use(errorHandler);
 
 // Start the server
-const PORT = process.env.PORT || 5001;
-app.listen(PORT, () =>
+app.listen(PORT, () => {
   console.log(
     `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
-  )
-);
+  );
+
+  keepAwake();
+});
