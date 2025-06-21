@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
@@ -12,7 +12,7 @@ const LoginScreen = () => {
   const [password, setPassword] = useState("");
   const searchParams = useLocation().search;
   const dispatch = useDispatch();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, error, userInfo } = userLogin;
@@ -21,7 +21,7 @@ const LoginScreen = () => {
 
   useEffect(() => {
     if (userInfo) {
-      navigate(redirect); 
+      navigate(redirect);
     }
   }, [userInfo, redirect, navigate]);
 
@@ -32,53 +32,67 @@ const LoginScreen = () => {
 
   return (
     <FormContainer>
-      <h1>Sign In</h1>
-      <Form onSubmit={submitHandler}>
+      <h1 className="text-center mb-4 mt-5">Sign In</h1>
+      <Form onSubmit={submitHandler} noValidate>
+        {/* Error Message */}
         {error && <Message variant="danger">{error}</Message>}
+        {/* Loading Spinner */}
         {loading && <Loader />}
-        <div className="form-row align-items-center">
-          <div className="my-1">
-            <label className="form-label" htmlFor="inlineFormInputName">
-              Email Address
-            </label>
-            <input
-              type="email"
-              className="form-control"
-              id="inlineFormInputNa"
-              placeholder="Enter Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-        </div>
 
-        <div className="form-row align-items-center">
-          <div className="my-1">
-            <label className="form-label" htmlFor="inlineFormInputName">
-              Password
-            </label>
-            <input
-              type="password"
-              className="form-control"
-              id="inlineFormInputName"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-        </div>
-        <Button type="submit" variant="primary">
+        {/* Email Field */}
+        <Form.Group controlId="email" className="mb-3">
+          <Form.Label>Email Address</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            autoComplete="email"
+            aria-describedby="emailHelp"
+          />
+          <Form.Text id="emailHelp" muted>
+            We'll never share your email with anyone else.
+          </Form.Text>
+        </Form.Group>
+
+        {/* Password Field */}
+        <Form.Group controlId="password" className="mb-3">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            autoComplete="current-password"
+          />
+        </Form.Group>
+
+        {/* Submit Button */}
+        <Button
+          type="submit"
+          variant="primary"
+          className="w-100 mt-2"
+          disabled={loading}
+        >
           Sign In
         </Button>
       </Form>
-      <div className="row py-3">
-        <div className="col">
-          New Customer?
-          <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>
+
+      {/* Register Link */}
+      <Row className="py-3">
+        <Col className="text-center">
+          <span className="me-2">New Customer?</span>
+          <Link
+            to={redirect ? `/register?redirect=${redirect}` : '/register'}
+            className="text-decoration-none fw-semibold"
+          >
             Register
           </Link>
-        </div>
-      </div>
+        </Col>
+      </Row>
+
     </FormContainer>
   );
 };

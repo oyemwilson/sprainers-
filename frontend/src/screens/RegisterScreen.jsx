@@ -42,7 +42,7 @@ const RegisterScreen = () => {
 
   return (
     <FormContainer>
-      <h1>Sign Up</h1>
+      <h1 className="mt-5 text-center">Sign Up</h1>
       <Form onSubmit={submitHandler}>
         {message && <Message variant="danger">{message}</Message>}
         {error && <Message variant="danger">{error}</Message>}
@@ -109,14 +109,14 @@ const RegisterScreen = () => {
             />
           </div>
         </div>
-        <Button type="submit" variant="primary">
+        <Button type="submit" variant="primary" className="w-100 mt-2">
           Register
         </Button>
       </Form>
       <div className="row py-3">
         <div className="col">
-          Have an Account?
-          <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>
+          Have an Account? 
+          <Link to={redirect ? `/login?redirect=${redirect}` : '/login'} className="text-decoration-none fw-semibold ms-2">
             Login
           </Link>
         </div>
