@@ -83,7 +83,7 @@ app.get('/ping', (req, res) => {
 
 // Self-ping function
 function keepAwake() {
-  const url = 'https://sprainers.onrender.com'; // Replace with your app's URL
+  const url = 'https://sprainers.onrender.com/ping'; // Replace with your app's URL
   setInterval(async () => {
     try {
       const response = await fetch(url);
